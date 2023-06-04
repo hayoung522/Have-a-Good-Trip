@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      animation: fadeOut 1s 9s forwards;
+    }
+
+    .bad {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: auto;
+      border-radius: 50%;
+      animation: moveVideo 8s linear infinite;
+      opacity: 0;
+      animation-delay: 10s;
+      animation-fill-mode: forwards;
+    }
+
+
+    @keyframes moveVideo {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(180deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        display: none;
+      }
+    }
+
+    .bg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const loadingDiv = document.querySelector('.loading');
+      const videoElement = document.querySelector('.bad');
+
+      setTimeout(() => {
+        loadingDiv.style.opacity = '0';
+        loadingDiv.style.pointerEvents = 'none';
+        videoElement.style.opacity = '1';
+        videoElement.classList.add('dissolve-in');
+      }, 10000);
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="loading">
+      <video src="hagt.mp4" autoplay loop muted></video>
+    </div>
+
+  <video autoplay muted loop plays-inline class="bg">
+    <source src="badtrip.mp4" type="video/mp4">
+  </video>
+
+    <video src="badtrip.mp4" autoplay loop muted class="bad"></video>
+  </div>
+</body>
+</html>
